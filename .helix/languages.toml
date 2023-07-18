@@ -1,0 +1,26 @@
+use-grammars = { only = [ "typescript", "aiken", "toml" ] }
+
+# Grammar is not working
+# [[grammar]]
+# name = "aiken"
+# # source = { git = "/home/waalge/clones/cardano/tree-sitter-aiken", rev = "25095a4152c3fed181aadf6282439443db8c7bbf" }
+# source = { git = "https://github.com/gleam-lang/tree-sitter-gleam", rev = "2d5d6b001ba12bf1c7ac94679d69ac2bed3151dc"}
+
+[[language]]
+name = "typescript"
+shebangs = ["deno", "node"]
+roots = ["deno.json", "package.json", "tsconfig.json"]
+config = { enable = true, lint = true, unstable = true }
+language-server = { command = "deno", args = ["lsp"], language-id = "typescript" }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "aiken"
+scope = "source.aiken"
+file-types = ["ak"]
+comment-token = "//"
+roots = ["aiken.toml"]
+config = { enable = true, lint = true, unstable = true }
+language-server = { command = "aiken", args = ["lsp"]}
+indent = { tab-width = 2, unit = "  " }
+

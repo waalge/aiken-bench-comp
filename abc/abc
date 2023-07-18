@@ -1,0 +1,4 @@
+#!/usr/bin/env lua
+local cli = require("cli")
+
+cli()
