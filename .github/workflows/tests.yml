@@ -15,5 +15,5 @@ jobs:
           version: v1.0.10-alpha
 
       # - run: aiken fmt --check # how to ignore directories?
-      - run: aiken check
-      - run: aiken build
+      - run: aiken check ./bench
+      - run: aiken build ./bench
