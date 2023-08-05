@@ -23,7 +23,7 @@ function groupBy(xs, key) {
 
 function githubUrlRoot() {
   // TODO get commit
-  return "https://github.com/waalge/aiken-bench/blob/main"
+  return "https://github.com/waalge/aiken-bench-comp/blob/main"
 }
 function solutionPath(user, group, version) {
   if (typeof(version) == "string" && version.length > 0) {
