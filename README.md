@@ -1,51 +1,58 @@
-# bench
+# Aiken Bench Comp
 
-> Aiken benchmark comp: a first draft
+> share aiken code one solution at a time
 
 ## About
 
-We're not here to make real validators: we're here to ace synthetic benchmarks. 
-The aim of is to explore what "best practice" means, and share ideas in how to write "good" aiken.
+We're not here to make real validators: we're here to ace synthetic benchmarks.
+The aim of is to explore what _best practice_ means, and share ideas in how to write _good_ aiken.
 
-This is a live project and we'll add _challenges_ and their _tests_ as we go. 
-Want to see a new challenge? Think the tests are cheatable? Raise an issue, discussion, or submit a PR! 
+This is a live project and we'll add _challenges_ and extend their _tests_ as we go. 
+Want to see a new challenge? Think the tests don't cover enough? Raise an issue, discussion, or submit a PR! 
 
-## Org 
+## Repo organization
 
 This repo uses nix flakes. This is not imperative, but you'll need to figure out your own dependencies.
 For non-flake setups you'll need to have aiken available, naturally.  The code gen scripts are written in lua.
 
 `./bench` is a standard aiken repo with a bit of a difference. 
 
-There is a `./templates` subdir.
-Each subdir of `./templates` is a challenge directory. 
-It contains a `_.ak` challenage file. This is what you need to complete to compete. 
-The other files are the tests/ benchmarks. This is what you need to ace to win. 
+There is an additional subdirectory called `./tests`.
+Each subdirectory of `./tests` corresponds to a challenge.
+It contains a solution template file `_.ak`. This is what you need to complete to compete. 
+The other files are the test modules/ benchmarks. This is what you need to ace to win. 
 Its TBC how to aggregate these to decide who is winning. 
 
 ## How to play
 
-To play in challenge:
+Go to the `./bench` directory.
+Choose a challenge from the `./tests` subdirectory. 
+Copy across the solution template to where _your_ solutions will go:
 ```sh
-cp ./template/{{challenge}}/_.ak ./lib/{{user}}/{{challenge}}.ak
+cp ./tests/{{challenge}}/_.ak ./lib/bench/{{user}}/{{challenge}}.ak
 ```
-and complete the function(s).
+Complete the function(s).
 
 We need to generate the tests for the challenge.
 See below on how to set this up for the first time. 
 
-Assuming `abc` is on path
+Assuming `abc` is on path then
 ```sh
-# presuming youre running from proj root
+# presuming youre running from proj root.
 abc gen ./bench 
-abc run ./bench 
+abc run ./bench
 ```
 This outputs a `results.json` file. 
 
-TODO: setup up github pages to render json as table.
-
+If you want to try multiple versions you can. 
+To do this, rather than having a single solution file `{{challenge}}.ak`,
+have a solution directory instead.
+Anything of the following form will be considered.
+```
+./lib/bench/{{user}}/{{challenge}}/{{version}}.ak
+```
 NOTES: 
-- Keep `{{user}}` as your github username, unless...  
+- Its assumed that `{{user}}` is your github username
 
 ## Setup 
 
@@ -64,4 +71,4 @@ Now `abc` is on path.
 
 Make sure your solutions commit is up-to-date with this repo.
 Submit a PR with your entrants.
-We'll get it merged and regenerate the league tables. (TODO : plumb in github pages)
+We'll get it merged and regenerate the league tables.
