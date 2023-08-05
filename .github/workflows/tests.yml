@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - uses: aiken-lang/setup-aiken@v0.1.0
         with:
           version: v1.0.10-alpha

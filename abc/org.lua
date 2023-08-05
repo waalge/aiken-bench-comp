@@ -87,7 +87,6 @@ local function getsolutions(path)
       end
     end
   end
-  print(pretty.dump(paths))
   return paths
 end
 

@@ -55,7 +55,7 @@
                 name = "serve-results";
                 category = "site";
                 command = ''
-                  caddy file-server --root ./site/ --listen :5555
+                  caddy file-server --root ./docs/ --listen :5555
                 '';
                 help = "Serve results as interactable table";
               }

@@ -30,15 +30,11 @@ local function join(a, ...)
 end
 
 local function mkdirs(a, b, ...)
-  print("mkdir", a)
   if a == nil then
     return
   end
   if not exists(a) then
-    local x = lfs.mkdir(a)
-    print("0", x)
-  else
-    print("1")
+    lfs.mkdir(a)
   end
   if b == nil then
     return
@@ -49,7 +45,6 @@ end
 local function readall(path)
   local file = io.open(path, "r")
   if not file then
-    print(path)
     error("File does not exist")
   end
   local content = file:read "*a"
@@ -58,7 +53,6 @@ local function readall(path)
 end
 
 local function writefile(path, content)
-  print("path", path)
   local file = io.open(path, "w")
   file:write(content)
   return file:close()
