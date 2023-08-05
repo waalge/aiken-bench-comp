@@ -51,6 +51,14 @@
                 '';
                 help = "Make abc";
               }
+              {
+                name = "serve-results";
+                category = "site";
+                command = ''
+                  caddy file-server --root ./site/ --listen :5555
+                '';
+                help = "Serve results as interactable table";
+              }
             ];
             devshell.startup.${"precommit"}.text = ''
               ${config.pre-commit.installationScript}
@@ -61,6 +69,8 @@
               pkgs.lua54Packages.luarocks
               pkgs.lua54Packages.luafilesystem
               pkgs.lua54Packages.argparse
+              pkgs.caddy
+              pkgs.nodePackages_latest.typescript-language-server
             ];
           };
         };

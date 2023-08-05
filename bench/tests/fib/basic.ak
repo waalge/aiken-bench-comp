@@ -1,4 +1,4 @@
-use bench/waalge/fib.{fib}
+use bench/{{{path}}}.{fib}
 
 test fib0() {
   fib(1, 1, 0) == 1

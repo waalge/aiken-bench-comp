@@ -1,7 +1,8 @@
-/// Compute the `nth` number in the fibonacci sequence starting from `l` and `r`
+/// Compute the `nth` number in the fibonacci sequence starting from `l` and `r` 
+/// PUB
 pub fn fib(l: Int, r: Int, n: Int) -> Int {
   if n < 0 {
-    error @"Impossible"
+    fail @"Impossible"
   } else {
     when n is {
       0 -> l

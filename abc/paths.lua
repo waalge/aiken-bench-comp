@@ -1,11 +1,10 @@
 local lfs = require "lfs"
 
-local function exists(name)
-  if type(name)~="string" then return false end
-  return os.rename(name, name) and true or false
+local function exists(path)
+  return type(lfs.attributes(path)) == "table" -- exists
 end
 
-local function maybetrim(a)
+function maybetrim(a)
   if type(a) ~= "string" then
     error("can only maybetrim strings")
   else
@@ -31,11 +30,15 @@ local function join(a, ...)
 end
 
 local function mkdirs(a, b, ...)
+  print("mkdir", a)
   if a == nil then
     return
   end
-  if not exists(a) then 
-    lfs.mkdir(a)
+  if not exists(a) then
+    local x = lfs.mkdir(a)
+    print("0", x)
+  else
+    print("1")
   end
   if b == nil then
     return
@@ -45,7 +48,7 @@ end
 
 local function readall(path)
   local file = io.open(path, "r")
-  if not file then 
+  if not file then
     print(path)
     error("File does not exist")
   end

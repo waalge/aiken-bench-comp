@@ -29,25 +29,28 @@ Summary
   ]]
 end
 
-local function result(challenge, file, user, passfail, mem, cpu, name) 
+local function result(group, testmod, user, version, passfail, mem, cpu, testname)
   return {
-    challenge=challenge,
-    file=file,
+    group=group,
+    testmod=testmod,
     user=user,
+    version=version,
     ispass = passfail == "PASS",
     mem=tonumber(mem),
     cpu=tonumber(cpu),
-    name=name
+    testname=testname
   }
 end
 
 local function parseblock(res)
-  local challenge, file, user= res:match("(%w+)/(%w+)/(%w+) ")
-  print("path", challenge, file, user)
+  local group, testmod, user, version = res:match("(%w+)/(%w+)/(%w+)/(%w+) ")
+  if version == nil then
+    group, testmod, user = res:match("(%w+)/(%w+)/(%w+) ")
+  end
   local results = {}
   local ii = 1
-  for passfail, mem, cpu, name in res:gmatch("│ (%w+) %[mem: +(%w+), cpu: +(%w+)] (%w+)\n") do
-    results[ii] = result(challenge, file, user, passfail, mem, cpu, name)
+  for passfail, mem, cpu, testname in res:gmatch("│ (%w+) %[mem: +(%w+), cpu: +(%w+)] (%w+)\n") do
+    results[ii] = result(group, testmod, user, version, passfail, mem, cpu, testname)
     ii = ii + 1
   end
   return results
@@ -61,16 +64,16 @@ local function concat(t1,t2)
 end
 
 
-local function parseall(res) 
+local function parseall(res)
   local results = {}
   local ii = 1
-  for block in res:gmatch("┍━ (.-)┕━") do 
-    concat(results, parseblock(block)) 
+  for block in res:gmatch("┍━ (.-)┕━") do
+    concat(results, parseblock(block))
   end
   return results
 end
 
-local function writeresult(jsonstr) 
+local function writeresult(jsonstr)
   p.writefile("results.json", jsonstr)
 end
 
