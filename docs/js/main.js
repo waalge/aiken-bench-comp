@@ -116,5 +116,5 @@ function load(_status, data) {
 }
 
 window.onload = function() {
-  getJson("./results2.json", load)
+  getJson("./results.json", load)
 }
